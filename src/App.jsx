@@ -80,6 +80,19 @@ function App() {
     };
   }, []);
 
+  // meta API token test fetch - can be removed once verified
+
+  useEffect(() => {
+    const metaToken = import.meta.env.VITE_META_API_TOKEN;
+    
+    fetch('https://graph.instagram.com/me/media', {
+      headers: { 'Authorization': `Bearer ${metaToken}` }
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+  }, []);
+
   const updateQty = (id, step) => {
     setCartItems((prev) =>
       prev
